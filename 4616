@@ -1,33 +1,33 @@
-左图：0；
+<!doctype html>
 <html>
 <head>
-文本对齐：居中；
-<h1 id="h1"></h1>
+<meta charset="utf-8">
+<title>2024年新年倒计时</title>
 <style>
 
 body{
-H 1跨度{
-for (var i = 0; i < precision; i++) {
+  overflow: hidden;
+  margin: 0;
 }
 
 h1{
-var step = (i / precision - 0.5) * (Math.PI * 2);
-this.size = Math.random()*2 + 1;
-window.addEventListener("touchmove", onMove);
-window.addEventListener("touchmove", onMove);
-window.addEventListener("resize", onResize);
+  position: fixed;
+  top: 30%;
+  left: 0;
+  width: 100%;
+  text-align: center;
   transform:translateY(-50%);
-onload=函数 starttime（）{
-时间（h1，'203,001'）；//2023
-ptimer=setTimeout（starttime，1000）；//添加计时器
-功能时间（obj，futimg）{
+  font-family: 'Love Ya Like A Sister', cursive;
+  font-size: 60px;
+  color: #c70012;
+  padding: 0 20px;
 }
 
-var nowtime=new Date（）. getTime（）；//现在时间转换为时间戳
-var futruetime=new Date(futimg). getTime（）；//未来时间转换为时间戳
-var msec=futuettime-nowtime；//毫秒 you-you
-var time=（msec/1000）；//毫秒/1000
-var day=parseInt（time/86400）；//天 24*60*60*1000
+h1 span{
+  position: fixed;
+  left: 0;
+  width: 100%;
+  text-align: center;
   margin-top:30px;
   font-size:40px;
 }
@@ -35,91 +35,91 @@ var day=parseInt（time/86400）；//天 24*60*60*1000
 </head>
 
 <body>
-var hour=parseInt（time/3600）-24*day；//小时 60*60*60 you-you mayou=
-var minute=parseInt（time％3600/60）；/分-（day*24）60 you mayoto mayoto
-<script>
-var second=parseInt（time％60）；//以 60 you you
-衬垫:020px；
-左图：0；
-
-宽度：100％；
-文本对齐：居中；
 <h1 id="h1"></h1>
+<canvas></canvas> <!--canvas 画布-->
+<script>
+var canvas = document.querySelector("canvas"),
+  ctx = canvas.getContext("2d");
+var ww,wh;
+
+function onResize(){
+  ww = canvas.width = window.innerWidth;
+  wh = canvas.height = window.innerHeight;
 }
 
-<canvas></canvas><！-canvas画布->
-var canvas = document.querySelector("canvas"),
-this.vertices = [];
-for (var i = 0; i < precision; i++) {
-H 1跨度{
-for (var i = 0; i < precision; i++) {
+ctx.strokeStyle = "red";
+ctx.shadowBlur = 25;
+ctx.shadowColor = "hsla(0, 100%, 60%,0.5)";
+var precision = 100;
+var hearts = [];
+var mouseMoved = false;
 
-var step = (i / precision - 0.5) * (Math.PI * 2);
-this.size = Math.random()*2 + 1;
-this.shadowBlur = Math.random() * 10;
-字体--家族：“爱雅如妹”，草书；
-字体大小:60 px；
+function onMove(e){
+  mouseMoved = true;
+  if(e.type === "touchmove"){
+    hearts.push(new Heart(e.touches[0].clientX, e.touches[0].clientY));
+    hearts.push(new Heart(e.touches[0].clientX, e.touches[0].clientY));
   }
 
   else{
-颜色：#c 70012；
-衬垫:020px；
+    hearts.push(new Heart(e.clientX, e.clientY));
+    hearts.push(new Heart(e.clientX, e.clientY));
   }
 }
 
-H 1跨度{
-位置：固定；
-左图：0；
-宽度：100％；
-文本对齐：居中；
-<h1 id="h1"></h1>
-H 1跨度{
-for (var i = 0; i < precision; i++) {
-var step = (i / precision - 0.5) * (Math.PI * 2);
-this.size = Math.random()*2 + 1;
+var Heart = function(x,y){
+  this.x = x || Math.random()*ww;
+  this.y = y || Math.random()*wh;
+  this.size = Math.random()*2 + 1;
+  this.shadowBlur = Math.random() * 10;
+  this.speedX = (Math.random()+0.2-0.6) * 8;
+  this.speedY = (Math.random()+0.2-0.6) * 8;
+  this.speedSize = Math.random()*0.05 + 0.01;
+  this.opacity = 1;
+  this.vertices = [];
   
-位置：固定；
-左图：0；
-宽度：100％；
-文本对齐：居中；
-<h1 id="h1"></h1>
+  for (var i = 0; i < precision; i++) {
+    var step = (i / precision - 0.5) * (Math.PI * 2);
+    var vector = {
+      x : (15 * Math.pow(Math.sin(step), 3)),
+      y : -(13 * Math.cos(step) - 5 * Math.cos(2 * step) - 2 * Math.cos(3 * step) - Math.cos(4 * step))
     }
     this.vertices.push(vector);
   }
 }
 
-<canvas></canvas><！-canvas画布->
-var canvas = document.querySelector("canvas"),
-ctx = canvas.getContext("2d");
-var ww,wh;
+Heart.prototype.draw = function(){
+  this.size -= this.speedSize;
+  this.x += this.speedX;
+  this.y += this.speedY;
   ctx.save();
   ctx.translate(-1000,this.y);
-ctx.scale(this.size, this.size);
+  ctx.scale(this.size, this.size);
   ctx.beginPath();
 
-for (var i = 0; i < precision; i++) {
-var vector = this.vertices[i];
-ctx.lineTo(vector.x, vector.y);
+  for (var i = 0; i < precision; i++) {
+    var vector = this.vertices[i];
+    ctx.lineTo(vector.x, vector.y);
   }
 
-ctx.globalAlpha = this.size;
-ctx.shadowBlur = Math.round((3 - this.size) * 10);
-ctx.shadowColor = "hsla(0, 100%, 60%,0.5)";
-this.size -= this.speedSize;
-this.x += this.speedX;
+  ctx.globalAlpha = this.size;
+  ctx.shadowBlur = Math.round((3 - this.size) * 10);
+  ctx.shadowColor = "hsla(0, 100%, 60%,0.5)";
+  ctx.shadowOffsetX = this.x + 1000;
+  ctx.globalCompositeOperation = "screen"
   ctx.closePath();
   ctx.fill()
   ctx.restore();
 };
 
-this.y += this.speedY;
+function render(a){
   requestAnimationFrame(render);
-for (var i = 0; i < precision; i++) {
+  hearts.push(new Heart())
   ctx.clearRect(0,0,ww,wh);
 
-window.addEventListener("mousemove", onMove);
+  for (var i = 0; i < hearts.length; i++) {
     hearts[i].draw();
-this.x = x || Math.random()*ww;
+    if(hearts[i].size <= 0){
       hearts.splice(i,1);
       i--;
     }
@@ -127,26 +127,26 @@ this.x = x || Math.random()*ww;
 }
 
 onResize();
+window.addEventListener("mousemove", onMove);
 window.addEventListener("touchmove", onMove);
-window.addEventListener("touchmove", onMove);
-window.addEventListener("touchmove", onMove);
-requestAnimationFrame(render);
 window.addEventListener("resize", onResize);
-onload=函数 starttime（）{
-时间（h1，'203,001'）；//2023
+requestAnimationFrame(render);
+window.onload=function starttime(){
+        time(h1,'2024,01,01');    // 2024年元旦时间
+        ptimer = setTimeout(starttime,1000); // 添加计时器
 }
 
-ptimer=setTimeout（starttime，1000）；//添加计时器
-功能时间（obj，futimg）{
-var nowtime=new Date（）. getTime（）；//现在时间转换为时间戳
-var futruetime=new Date(futimg). getTime（）；//未来时间转换为时间戳
-var msec=futuettime-nowtime；//毫秒 you-you
-var time=（msec/1000）；//毫秒/1000
-var day=parseInt（time/86400）；//天 24*60*60*1000
-var hour=parseInt（time/3600）-24*day；//小时 60*60*60 you-you mayou=
-var minute=parseInt（time％3600/60）；/分-（day*24）60 you mayoto mayoto
-var second=parseInt（time％60）；//以 60 you you
-衬垫:020px；
+    function time(obj,futimg){
+        var nowtime = new Date().getTime(); // 现在时间转换为时间戳
+        var futruetime =  new Date(futimg).getTime(); // 未来时间转换为时间戳
+        var msec = futruetime-nowtime; // 毫秒 未来时间-现在时间
+        var time = (msec/1000);  // 毫秒/1000
+        var day = parseInt(time/86400); // 天  24*60*60*1000
+        var hour = parseInt(time/3600)-24*day;    // 小时 60*60 总小时数-过去的小时数=现在的小时数
+        var minute = parseInt(time%3600/60); // 分 -(day*24) 以60秒为一整份 取余 剩下秒数 秒数/60 就是分钟数
+        var second = parseInt(time%60);  // 以60秒为一整份 取余 剩下秒数
+        obj.innerHTML="<br>距离2024年还有：<br>"+day+"天"+hour+"小时"+minute+"分"+second+"秒"+"<br><span>愿所有人平安喜乐，心想事成。</span>"
+        return true;
     }
 
 </script>
